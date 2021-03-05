@@ -77,3 +77,41 @@ console.log(ex.f())
 
 const ex2 = ex.f;
 console.log(ex2()) // ex객체의 함수만 할당했으므로, this.name이 할당되지 않았기 때문에 undefined가 할당됨
+
+
+// 화살표 표기법 f1과 f1_1, f2와 f2_1, f3과 f3_1은 동일한 함수
+const n1 = function(){return "hello";}
+const n1_1 = () => "hello";
+
+const n2 = function(name){return `my name : ${name}`;}
+const n2_1 = name => `my name : ${name}`;
+
+const n3 = function(a, b) {return a+b;}
+const n3_1 = (a,b) => a+b;
+
+
+// call 메서드 : 모든 함수에서 호출할 수 있는 기본 메서드로, this를 특정 객체로 지정할 수 있다. 즉, 인스턴스 변수를 지정가능
+const bruce = {name : "bruce"};
+const adam = {name : "adam"};
+
+function greets() {
+    return `hello ${this.name}`;
+}
+
+console.log(greets());
+console.log(greets.call(bruce));
+console.log(greets.call(adam));
+// call 함수의 첫번째 인자는 this로 사용할 객체이며, 이후의 매개변수는 함수에서 사용할 매개변수 이다.
+
+function update(birthday, occupation){
+    this.birthday = birthday;
+    this.occupation = occupation;
+}
+
+update.call(bruce, 1997, "student"); // 기존에 이름 프로퍼티만 있던 객체에 다른 프토퍼티를 추가할 수 있게된다. 즉, 이런식으로 객체에 ㅍ로퍼티 추가 가능
+console.log(bruce);
+
+// apply : 매개변수를 처리하는 방법을 제외하면 call 메서드와 동일 
+update.apply(adam, [1995, "ceo"]);
+console.log(adam);
+// apply 메서드는 객체는 call함수와 동일하게 받되, 함수에서 사용될 매개변수들을 배열의 형태로 전달한다.
