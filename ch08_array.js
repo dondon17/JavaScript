@@ -156,6 +156,16 @@ function cardToStr(c){
         values[i] = i;
 
     return values[c.value]+suits[c.suit];
-};
+}; 
 
 console.log(cards.filter(c => c.value === 2).map(cardToStr));
+
+
+// reduce
+const ex = [1]
+while(ex.length!=5){
+    let e = ex.reduce((a,x)=>a+=x);
+    ex.push(e)
+
+}
+console.log(ex)
